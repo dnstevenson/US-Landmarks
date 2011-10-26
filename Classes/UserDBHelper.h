@@ -1,11 +1,15 @@
 #import </usr/include/sqlite3.h>
 #import "DBHelper.h"
+#import "FMDatabase.h"
 
 @interface UserDBHelper : NSObject {
-	sqlite3 *database;
+//	sqlite3 *database;
+    FMDatabase *db;
 }
 
-@property (nonatomic) sqlite3 *database;
+//@property (nonatomic) sqlite3 *database;
+@property (nonatomic, retain) FMDatabase *db;
+
 + (UserDBHelper *) getInstance;
 - (NSString *) dbFilePath;
 - (BOOL) databaseExists;
@@ -16,12 +20,6 @@
 - (BOOL) favoriteExists:(int) objectID;
 - (NSMutableArray*) getFavorites;
 
-//- (void) saveNote:(Note*) note;
-//- (int) addNote:(Note*) note;
-//- (void) removeNote:(int) noteID;
-//- (Note*) getNote:(int) noteID;
-//- (NSMutableArray*) getNotes:(int) plantID;
-
--(NSString*) checkForNull:(char*)incoming;
+//-(NSString*) checkForNull:(char*)incoming;
 
 @end

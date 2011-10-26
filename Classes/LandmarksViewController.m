@@ -59,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	self.title = [state name];
 
-	data = [[DBHelper getInstance] getLandmarksForState:[state id]];	
+	self.data = [[DBHelper getInstance] getLandmarksForState:[state id]];	
 	[self.tableView reloadData];	
 	[super viewWillAppear:animated];
 }

@@ -113,14 +113,14 @@ static DBHelper *instance;
 	NSString *query = @"SELECT id, name, description, wikipedia_url,date,latitude,longitude, image_name FROM landmarks where id = ?"; 
     FMResultSet *rs = [db executeQuery:query, [NSNumber numberWithInt:landmarkID]];
     while ([rs next]) {
-        landmark = [[Landmark alloc] initWithId:[rs intForColumnIndex:0]
+        landmark = [[[Landmark alloc] initWithId:[rs intForColumnIndex:0]
                                        withName:[rs stringForColumnIndex:1]
                                 withDescription:[rs stringForColumnIndex:2]
-                               withWikipediaURL:[[NSURL alloc] initWithString:[rs stringForColumnIndex:3]]
+                               withWikipediaURL:[NSURL URLWithString:[rs stringForColumnIndex:3]]
                                        withDate:[rs stringForColumnIndex:4]
                                    withLatitude:[rs stringForColumnIndex:5]
                                   withLongitude:[rs stringForColumnIndex:6]
-                                  withImageName:[rs stringForColumnIndex:7]];
+                                  withImageName:[rs stringForColumnIndex:7]] autorelease];
     }
     [rs close];
 	return landmark;
@@ -156,7 +156,7 @@ static DBHelper *instance;
 
 - (NSMutableArray*) getAllLandmarks {
 	NSLog(@"userdbhelper - getLandmarksForState");
-	NSMutableArray *landmarks = [[NSMutableArray alloc] init];
+	NSMutableArray *landmarks = [[[NSMutableArray alloc] init] autorelease];
 	
 	NSString *query = @"SELECT id, name, description, wikipedia_url,date,latitude,longitude, image_name FROM landmarks"; 
     FMResultSet *rs = [db executeQuery:query];
@@ -164,7 +164,7 @@ static DBHelper *instance;
         Landmark *landmark = [[Landmark alloc] initWithId:[rs intForColumnIndex:0]
                                                  withName:[rs stringForColumnIndex:1]
                                           withDescription:[rs stringForColumnIndex:2]
-                                         withWikipediaURL:[[NSURL alloc] initWithString:[rs stringForColumnIndex:3]]
+                                         withWikipediaURL:[NSURL URLWithString:[rs stringForColumnIndex:3]]
                                                  withDate:[rs stringForColumnIndex:4]
                                              withLatitude:[rs stringForColumnIndex:5]
                                             withLongitude:[rs stringForColumnIndex:6]
@@ -179,7 +179,7 @@ static DBHelper *instance;
 
 - (NSMutableArray*) getLandmarksForState:(int) stateID {
 	NSLog(@"userdbhelper - getLandmarksForState");
-	NSMutableArray *landmarks = [[NSMutableArray alloc] init];
+	NSMutableArray *landmarks = [[[NSMutableArray alloc] init] autorelease];
 	
 	NSString *query = @"SELECT id, name, description, wikipedia_url,date,latitude,longitude, image_name FROM landmarks where state_id = ?"; 
     FMResultSet *rs = [db executeQuery:query, [NSNumber numberWithInt:stateID]];
@@ -187,7 +187,7 @@ static DBHelper *instance;
         Landmark *landmark = [[Landmark alloc] initWithId:[rs intForColumnIndex:0]
                                         withName:[rs stringForColumnIndex:1]
                                  withDescription:[rs stringForColumnIndex:2]
-                                withWikipediaURL:[[NSURL alloc] initWithString:[rs stringForColumnIndex:3]]
+                                         withWikipediaURL:[NSURL URLWithString:[rs stringForColumnIndex:3]]
                                         withDate:[rs stringForColumnIndex:4]
                                     withLatitude:[rs stringForColumnIndex:5]
                                    withLongitude:[rs stringForColumnIndex:6]
@@ -253,7 +253,7 @@ static DBHelper *instance;
 //}
 
 - (NSMutableArray*) getStates {
-	NSMutableArray *states = [[NSMutableArray alloc] init];
+	NSMutableArray *states = [[[NSMutableArray alloc] init] autorelease];
 	NSString *query = @"SELECT id, name, latitude, longitude FROM states"; 
     FMResultSet *rs = [db executeQuery:query];
     while ([rs next]) {
@@ -283,6 +283,8 @@ static DBHelper *instance;
 }
 
 -(void) dealloc {
+    [db close];
+    [instance release];
     [super dealloc];
 }
 

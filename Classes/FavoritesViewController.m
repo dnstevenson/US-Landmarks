@@ -57,7 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-	data = [[UserDBHelper getInstance] getFavorites];	
+	self.data = [[UserDBHelper getInstance] getFavorites];	
 	[self.tableView reloadData];	
 	[super viewWillAppear:animated];
 }

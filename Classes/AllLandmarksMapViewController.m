@@ -76,8 +76,9 @@
 			
 			EGOImageView *leftIconImageView = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"transparent_icon_small.png"]];
 			NSString *encodedImageNameString = [NSString stringWithFormat:@"%@", [[(Landmark*)annotation imageName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-			leftIconImageView.imageURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.stevensonsoftware.com/us_landmarks/image_thumbnails/row_75x75_%@", encodedImageNameString]];
-			customPinView.leftCalloutAccessoryView = leftIconImageView;			
+			leftIconImageView.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.stevensonsoftware.com/us_landmarks/image_thumbnails/row_75x75_%@", encodedImageNameString]];
+			customPinView.leftCalloutAccessoryView = leftIconImageView;	
+            [leftIconImageView release];
 			
 			UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 			customPinView.rightCalloutAccessoryView = rightButton;			

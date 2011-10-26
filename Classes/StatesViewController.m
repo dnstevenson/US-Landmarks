@@ -65,7 +65,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	NSLog(@"viewWillAppear");
-	data = [[DBHelper getInstance] getStates];	
+	self.data = [[DBHelper getInstance] getStates];	
 	[self.tableView reloadData];	
 	[super viewWillAppear:animated];
 }
