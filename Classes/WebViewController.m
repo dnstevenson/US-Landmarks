@@ -16,11 +16,11 @@
 @synthesize toolbar, forwardButton, backButton;
 
 - (IBAction) goForward:(id)sender {
-	webView.goForward;
+	[webView goForward];
 }
 
 - (IBAction) goBack:(id)sender {
-	webView.goBack;
+	[webView goBack];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

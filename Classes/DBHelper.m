@@ -122,6 +122,8 @@ static DBHelper *instance;
                                   withLongitude:[rs stringForColumnIndex:6]
                                   withImageName:[rs stringForColumnIndex:7]] autorelease];
     }
+
+    //[rs columnIndexIsNull:0];
     [rs close];
 	return landmark;
 }
